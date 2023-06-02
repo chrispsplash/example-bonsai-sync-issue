@@ -1,0 +1,16 @@
+apiVersion: garden.io/v1
+kind: Project
+name: example-problem
+
+environments:
+  - name: example
+    defaultNamespace: ${local.username}
+
+providers:
+  - name: kubernetes
+    environments: [example]
+    context: ${local.env.KUBE_CONTEXT}
+    buildMode: cluster-buildkit
+    deploymentRegistry:
+      hostname: ${local.env.REGISTRY_HOSTNAME}
+      namespace: example
